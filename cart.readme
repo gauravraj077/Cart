@@ -1,0 +1,10 @@
+id
+cartId
+productName
+productCategory
+productDescription
+quantity
+price
+productImage
+creationDate
+lastModifiedDate
