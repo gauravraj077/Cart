@@ -35,11 +35,11 @@ public class CartService {
     }
     
     
-    public List<Cart> getProductByQuantity(String quantity,Date lastModifiedDate ,String productName) {
-        return cartRepository.findByQuantity(quantity,lastModifiedDate,productName);
+    public List<Cart> getProductByQuantity(int quantity) {
+        return cartRepository.findByQuantity(quantity);
     }
-    public List<Cart> getProductBycreationDate(Date creationDate) {
-        return cartRepository.findByCreationDate(creationDate);
+    public List<Cart> getProductByCreatedDate(Date createdDate) {
+        return cartRepository.findByCreatedDate(createdDate);
     }
     public List<Cart> getProductBylastModifiedDate(Date lastModifiedDate) {
         return cartRepository.findByLastModifiedDate(lastModifiedDate);

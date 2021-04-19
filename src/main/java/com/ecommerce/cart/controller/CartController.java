@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -48,15 +49,19 @@ public class CartController {
     }
     
     @PostMapping("/insertCart")
-    public void add(@RequestBody Cart Cart) {
-        cartService.saveProduct(Cart);
+    public void add(@RequestBody Cart cart) {
+    	Cart cart1=cart;
+    	cart1.setCreatedDate(new Date());
+        cartService.saveProduct(cart1);
     }
     @PutMapping("/updateCartById/{productId}")
-    public ResponseEntity<?> update(@RequestBody Cart Cart, @PathVariable Integer productId) {
+    public ResponseEntity<?> update(@RequestBody Cart cart, @PathVariable Integer productId) {
         try {
             Cart existProduct = cartService.getProduct(productId);
-            Cart.setid(productId);
-            cartService.saveProduct(Cart);
+           // cart=existProduct;
+            cart.setid(productId);
+            cart.setLastModifiedDate(new Date());
+            cartService.saveProduct(cart);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
